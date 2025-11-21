@@ -1,6 +1,5 @@
 {
   "name": "DVI Bridge Card",
-  "filename": "/dist/dvi-bridge-card.js",
-  "content_in_root": false,
+  "content_in_root": true,
   "render_readme": true
 }

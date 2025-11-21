@@ -12,7 +12,7 @@ class DviBridgeCard extends HTMLElement {
     this.innerHTML = `
       <ha-card header="DVI LV Compact varmepumpe">
         <div id="container" style="position:relative;">
-          <img src="/hacsfiles/dvi-bridge-card/images/dvi.gif?v=2" style="width:100%;" />
+          <img src="/hacsfiles/dvi-bridge-card/dvi.gif?v=2" style="width:100%;" />
         </div>
       </ha-card>
     `;
@@ -31,8 +31,8 @@ class DviBridgeCard extends HTMLElement {
     // --- CV pump conditional ---
     const cvPump = this._hass.states["binary_sensor.dvi_lv12_circ_pump_cv"];
     if (cvPump?.state === "on") {
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/images/CV_on.gif", "55%", "78%", "21%");
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/images/CVflow_on.gif", "76.9%", "64.7%", "14.2%");
+      this._addImage(container, "/hacsfiles/dvi-bridge-card/CV_on.gif", "55%", "78%", "21%");
+      this._addImage(container, "/hacsfiles/dvi-bridge-card/CVflow_on.gif", "76.9%", "64.7%", "14.2%");
       this._addLabel(container, "sensor.dvi_lv12_cv_forward", "74.2%", "70%");
       this._addLabel(container, "sensor.dvi_lv12_cv_return", "89%", "70%");
     }
@@ -49,8 +49,8 @@ class DviBridgeCard extends HTMLElement {
     // --- Compressor conditional ---
     const compressor = this._hass.states["binary_sensor.dvi_lv12_soft_starter_compressor"];
     if (compressor?.state === "on") {
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/images/HP_on.gif", "25.6%", "1.4%", "33.9%");
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/images/COMP_on.gif", "25.6%", "35.4%", "21.3%");
+      this._addImage(container, "/hacsfiles/dvi-bridge-card/HP_on.gif", "25.6%", "1.4%", "33.9%");
+      this._addImage(container, "/hacsfiles/dvi-bridge-card/COMP_on.gif", "25.6%", "35.4%", "21.3%");
       this._addLabel(container, "sensor.dvi_lv12_evaporator", "74%", "11%");
       this._addLabel(container, "sensor.dvi_lv12_compressor_hp", "28%", "38.5%");
       this._addLabel(container, "sensor.dvi_lv12_compressor_lp", "28%", "29%");
