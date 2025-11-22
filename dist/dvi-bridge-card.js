@@ -1,4 +1,10 @@
 class DviBridgeCard extends HTMLElement {
+
+   // Base path for images, regardless of where HACS installs the card
+   static get imageBase() {
+     return new URL("./images/", import.meta.url).href;
+   }
+
   setConfig(config) {
     this._config = config;
   }
@@ -12,7 +18,7 @@ class DviBridgeCard extends HTMLElement {
     this.innerHTML = `
       <ha-card header="DVI LV Compact varmepumpe">
         <div id="container" style="position:relative;">
-          <img src="/hacsfiles/dvi-bridge-card/dvi.gif?v=2" style="width:100%;" />
+          <img src="${DviBridgeCard.imageBase}/dvi.gif?v=2" style="width:100%;" />
         </div>
       </ha-card>
     `;
@@ -31,8 +37,8 @@ class DviBridgeCard extends HTMLElement {
     // --- CV pump conditional ---
     const cvPump = this._hass.states["binary_sensor.dvi_lv12_circ_pump_cv"];
     if (cvPump?.state === "on") {
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/CV_on.gif", "55%", "78%", "21%");
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/CVflow_on.gif", "76.9%", "64.7%", "14.2%");
+      this._addImage(container, `${DviBridgeCard.imageBase}/CV_on.gif`, "55%", "78%", "21%");
+      this._addImage(container, `${DviBridgeCard.imageBase}/CVflow_on.gif`, "76.9%", "64.7%", "14.2%");
       this._addLabel(container, "sensor.dvi_lv12_cv_forward", "74.2%", "70%");
       this._addLabel(container, "sensor.dvi_lv12_cv_return", "89%", "70%");
     }
@@ -49,8 +55,8 @@ class DviBridgeCard extends HTMLElement {
     // --- Compressor conditional ---
     const compressor = this._hass.states["binary_sensor.dvi_lv12_soft_starter_compressor"];
     if (compressor?.state === "on") {
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/HP_on.gif", "25.6%", "1.4%", "33.9%");
-      this._addImage(container, "/hacsfiles/dvi-bridge-card/COMP_on.gif", "25.6%", "35.4%", "21.3%");
+      this._addImage(container, `${DviBridgeCard.imageBase}/HP_on.gif`, "25.6%", "1.4%", "33.9%");
+      this._addImage(container, `${DviBridgeCard.imageBase}/COMP_on.gif`, "25.6%", "35.4%", "21.3%");
       this._addLabel(container, "sensor.dvi_lv12_evaporator", "74%", "11%");
       this._addLabel(container, "sensor.dvi_lv12_compressor_hp", "28%", "38.5%");
       this._addLabel(container, "sensor.dvi_lv12_compressor_lp", "28%", "29%");
@@ -220,4 +226,14 @@ class DviBridgeCard extends HTMLElement {
   }
 }
 
-customElements.define("dvi-bridge-card", DviBridgeCard);
+ // Register card in the Lovelace card picker
+ window.customCards = window.customCards || [];
+ window.customCards.push({
+   type: "dvi-bridge-card",
+   name: "DVI LV Compact Heatpump Card",
+   description: "Visual overview and control panel for a DVI LV compact heatpump.",
+   preview: true,                 // gør at det dukker op under "Custom cards"
+   documentationURL: "https://github.com/ruteclrp/dvi-bridge-card"
+ });
+
+ customElements.define("dvi-bridge-card", DviBridgeCard);
